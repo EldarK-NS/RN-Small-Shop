@@ -6,4 +6,12 @@ const userSchema = mongoose.Schema({
   password: String,
 });
 
+// change "_id" to "id"
+userSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+userSchema.set("toJSON", {
+  virtuals: true,
+});
+
 exports.User = mongoose.model("User", userSchema);
