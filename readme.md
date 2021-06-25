@@ -1,0 +1,1 @@
+start server npm start

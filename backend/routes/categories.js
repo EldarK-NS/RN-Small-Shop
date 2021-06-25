@@ -18,6 +18,7 @@ router.get("/:id", async (req, res) => {
   res.status(200).send(category);
 });
 
+//!Create category
 router.post("/", async (req, res) => {
   let category = new Category({
     name: req.body.name,
@@ -27,10 +28,12 @@ router.post("/", async (req, res) => {
   category = await category.save();
 
   if (!category) {
-    return res.status(404).send("the category can not be created");
+    return res.status(400).send("the category can not be created");
   }
   res.send(category);
 });
+
+//!delete category
 
 router.delete("/:id", (req, res) => {
   Category.findByIdAndRemove(req.params.id)
@@ -50,6 +53,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+//!update category
 router.put("/:id", async (req, res) => {
   const category = await Category.findByIdAndUpdate(
     req.params.id,
@@ -61,7 +65,7 @@ router.put("/:id", async (req, res) => {
     { new: true }
   );
   if (!category) {
-    return res.status(404).send("the category can not be updated");
+    return res.status(400).send("the category can not be updated");
   }
   res.send(category);
 });
