@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
     return res.status(400).send("the user can not be created");
   }
   res.send(user);
-  console.log(user);
+//   console.log(user);
 });
 
 //!Registration for users
@@ -66,7 +66,7 @@ router.post("/register", async (req, res) => {
     return res.status(400).send("the user can not be created");
   }
   res.send(user);
-  console.log(user);
+//   console.log(user);
 });
 
 router.post("/login", async (req, res) => {

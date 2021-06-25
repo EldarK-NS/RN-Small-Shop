@@ -10,8 +10,10 @@ function authJwt() {
   }).unless({
     //! затребование проверки токена при логине и регистрации  также при  получении информации общего характера для обычного не зарегестрированного пользователя, т.е. не зарегестрированный пользователь может просматривать продукты,искать их без регистрации, но не может делать действия "POST"
     path: [
+      { url: /\/public\/uploads(.*)/, methods: ["GET", "OPTIONS"] },
       { url: /\/api\/v1\/products(.*)/, methods: ["GET", "OPTIONS"] },
       { url: /\/api\/v1\/categories(.*)/, methods: ["GET", "OPTIONS"] },
+      { url: /\/api\/v1\/orders(.*)/, methods: ["GET", "OPTIONS", "POST"] },
       "/api/v1/users/login",
       "/api/v1/users/register",
     ],
