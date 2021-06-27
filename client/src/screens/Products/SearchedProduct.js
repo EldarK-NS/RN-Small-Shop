@@ -10,7 +10,7 @@ export default function SearchedProduct(props) {
     <Content style={{width:width}}>
       {productsFiltered.length > 0 ? (
         productsFiltered.map((item) => (
-          <ListItem key={item._id.$oid} avatar>
+          <ListItem key={item._id} avatar>
             <Left>
               <Thumbnail
                 source={{

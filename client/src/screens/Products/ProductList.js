@@ -10,18 +10,19 @@ import ProductCart from "./ProductCart";
 
 const { width } = Dimensions.get("window");
 
-export default function ProductList({ key, item }) {
+export default function ProductList({ item }) {
   return (
-    <TouchableOpacity activeOpacity={0.5}>
-      <View style={styles.container}>
+    <View activeOpacity={0.5} style={{width:'50%'}} >
+      <TouchableOpacity style={styles.container}>
         <ProductCart {...item} />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     width: width / 2,
+    backgroundColor:'gainsboro'
   },
 });

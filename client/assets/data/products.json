@@ -1,7 +1,5 @@
 [{
-   "_id": {
-     "$oid": "5f15d8852a025143f9593a7c"
-   },
+   "_id": "5f15d8852a025143f9593a7c" ,
    "image": "https://www.artofbrilliance.co.uk/wp-content/uploads/2019/02/happy-tshirt-1.jpg",
    "brand": "PS3",
    "price": 250,
@@ -11,14 +9,12 @@
    "name": "FIFA 20",
    "description": "The most hard FIFA ever",
    "category": {
-     "$oid": "5f15d5cdcb4a6642bddc0fe9"
+     "id": "5f15d5cdcb4a6642bddc0fe9"
    },
    "countInStock": 25,
    "__v": 0
  },{
-   "_id": {
-     "$oid": "5f15d92ee520d44421ed8e9b"
-   },
+   "_id":  "5f15d92ee520d44421ed8e9b" ,
    "image": "",
    "brand": "IKEA",
    "price": 350.9,
@@ -28,14 +24,12 @@
    "name": "Garden Chair",
    "description": "beautiful chair for garden",
    "category": {
-     "$oid": "5f15d5b7cb4a6642bddc0fe8"
+     "id": "5f15d5b7cb4a6642bddc0fe8"
    },
    "countInStock": 10,
    "__v": 0
  },{
-   "_id": {
-     "$oid": "5f15d964e520d44421ed8e9c"
-   },
+   "_id":  "5f15d964e520d44421ed8e9c" ,
    "image": "",
    "brand": "OBI",
    "price": 1350.9,
@@ -45,14 +39,12 @@
    "name": "Swimming Pool",
    "description": "beautiful Swimming Pool for garden",
    "category": {
-     "$oid": "5f15d5b7cb4a6642bddc0fe8"
+     "id": "5f15d5b7cb4a6642bddc0fe8"
    },
    "countInStock": 10,
    "__v": 0
  },{
-   "_id": {
-     "$oid": "5f15d9b3e520d44421ed8e9d"
-   },
+   "_id":  "5f15d9b3e520d44421ed8e9d" ,
    "image": "https://static1.squarespace.com/static/5a51022ff43b55247f47ccfc/5a567854f9619a96fd6233bb/5b74446c40ec9afbc633e555/1534346950637/Husqvarna+545FR+%282%29.png?format=1500w",
    "brand": "OBI",
    "price": 490.9,
@@ -62,14 +54,12 @@
    "name": "Grass Cut Machine",
    "description": "Grass Cut Machine for garden",
    "category": {
-     "$oid": "5f15d5b7cb4a6642bddc0fe8"
+     "id": "5f15d5b7cb4a6642bddc0fe8"
    },
    "countInStock": 5,
    "__v": 0
  },{
-   "_id": {
-     "$oid": "5f15da13e520d44421ed8e9e"
-   },
+   "_id":  "5f15da13e520d44421ed8e9e" ,
    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6xv7IQIEPulylWxoskYN0kLN1p4KhvL_iZw&usqp=CAU",
    "brand": "Mobilix",
    "price": 1000,
@@ -79,7 +69,7 @@
    "name": "Sofa",
    "description": "Big Sofa for living room",
    "category": {
-     "$oid": "5f15d5b2cb4a6642bddc0fe7"
+     "id": "5f15d5b2cb4a6642bddc0fe7"
    },
    "countInStock": 2,
    "__v": 0

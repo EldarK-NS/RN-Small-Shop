@@ -30,7 +30,7 @@ export default function Banner() {
           <Swiper
             showButtons={false}
             autoplay={true}
-            autoplayTimeout={2}
+            autoplayTimeout={10}
             style={{ height: width / 2 }}
           >
             {bannerData.map((item) => {
