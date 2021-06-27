@@ -10,19 +10,26 @@ import ProductCart from "./ProductCart";
 
 const { width } = Dimensions.get("window");
 
-export default function ProductList({ item }) {
+export default function ProductList(props) {
+   const {item}=props
   return (
-    <View activeOpacity={0.5} style={{width:'50%'}} >
-      <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      style={{ width: "50%" }}
+      onPress={() =>
+        props.navigation.navigate("Product Detail", { item: item })
+      }
+    >
+      <View style={styles.container}>
         <ProductCart {...item} />
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     width: width / 2,
-    backgroundColor:'gainsboro'
+    backgroundColor: "gainsboro",
   },
 });

@@ -17,8 +17,7 @@ import CategoryFilter from "./CategoryFilter";
 
 const { height } = Dimensions.get("window");
 
-export default function ProductContainer() {
-  console.log(productCategories);
+export default function ProductContainer(props) {
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [focus, setFocus] = useState();
@@ -88,7 +87,10 @@ export default function ProductContainer() {
         </Item>
       </Header>
       {focus == true ? (
-        <SearchedProduct productsFiltered={productsFiltered} />
+        <SearchedProduct
+          productsFiltered={productsFiltered}
+          navigation={props.navigation}
+        />
       ) : (
         <ScrollView>
           <View>
@@ -107,7 +109,13 @@ export default function ProductContainer() {
             {productCtg.length > 0 ? (
               <View style={styles.listContainer}>
                 {productCtg.map((item) => {
-                  return <ProductList key={item._id} item={item} />;
+                  return (
+                    <ProductList
+                      key={item._id}
+                      item={item}
+                      navigation={props.navigation}
+                    />
+                  );
                 })}
               </View>
             ) : (
@@ -123,12 +131,12 @@ export default function ProductContainer() {
 }
 
 const styles = StyleSheet.create({
-//   container: {
-//     backgroundColor: "gainsboro",
-//   },
+  //   container: {
+  //     backgroundColor: "gainsboro",
+  //   },
   listContainer: {
     height: height,
-    width: "100%",
+    //  width: "100%",
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",

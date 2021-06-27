@@ -1,25 +1,18 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View, LogBox } from "react-native";
-import ProductContainer from "./src/screens/Products/ProductContainer";
+import { LogBox } from "react-native";
 import Header from "./src/Components/Header";
+import { NavigationContainer } from "@react-navigation/native";
+import MainNavigator from "./src/Navigators/MainNavigator";
 
 // LogBox.ignoreAllLogs(true);
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <NavigationContainer>
       <Header />
-      <ProductContainer />
-    </View>
+      <MainNavigator />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
