@@ -8,10 +8,13 @@ import {
   Button,
   Pressable,
 } from "react-native";
+import { connect } from "react-redux";
+import * as actions from "../../../redux/actions/cartActions";
 
 const { width } = Dimensions.get("window");
 
-export default function ProductCart({ name, price, image, countInStock }) {
+function ProductCart(props) {
+  const { name, price, image, countInStock } = props;
   return (
     <View style={styles.container}>
       <Image
@@ -29,15 +32,13 @@ export default function ProductCart({ name, price, image, countInStock }) {
       </Text>
       <Text style={styles.price}>${price}</Text>
       {countInStock > 0 ? (
-        <Pressable style={styles.buttonContainer}>
-          <Text
-            style={styles.button}
-            onPress={() => {
-              console.log("hello");
-            }}
-          >
-            ADD
-          </Text>
+        <Pressable
+          style={styles.buttonContainer}
+          onPress={() => {
+            props.addItemToCart(props);
+          }}
+        >
+          <Text style={styles.button}>ADD</Text>
         </Pressable>
       ) : (
         <Text style={{ marginTop: 20, color: "red" }}>
@@ -47,6 +48,14 @@ export default function ProductCart({ name, price, image, countInStock }) {
     </View>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItemToCart: (product) => {
+      return dispatch(actions.addToCart({ quantity: 1, product }));
+    },
+  };
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -98,3 +107,4 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+export default connect(null, mapDispatchToProps)(ProductCart);
