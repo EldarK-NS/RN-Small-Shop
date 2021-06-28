@@ -37,7 +37,7 @@ function Cart(props) {
           <H1 style={{ alignSelf: "center" }}>Cart</H1>
           <SwipeListView
             data={props.cartItems}
-            renderItem={(data) => <CartItem item={data} />}
+            renderItem={(data, idx) => <CartItem item={data} key={idx}/>}
             renderHiddenItem={(data) => (
               <View style={styles.hiddenContainer}>
                 <TouchableOpacity

@@ -8,7 +8,7 @@ import MainNavigator from "./src/Navigators/MainNavigator";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-// LogBox.ignoreAllLogs(true);
+LogBox.ignoreAllLogs(true);
 
 export default function App() {
   return (
