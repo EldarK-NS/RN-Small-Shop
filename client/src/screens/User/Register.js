@@ -13,17 +13,17 @@ export default function Register(props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  const Register = () => {
+  const register = () => {
     if (email === "" || name === "" || phone === "" || password === "") {
       setError("Please fill in the form correctly!");
     }
     let user = {
-      name,
-      email,
-      phone,
-      password,
+      name: name,
+      email: email,
+      phone: phone,
+      password: password,
       isAdmin: false,
     };
     axios
@@ -40,14 +40,15 @@ export default function Register(props) {
             props.navigation.navigate("Login");
           }, 1000);
         }
-      }).catch((error) => {
+      })
+      .catch((error) => {
         Toast.show({
           topOffset: 60,
           type: "error",
           text1: "Something went wrong",
           text2: "Please try again",
         });
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -92,7 +93,7 @@ export default function Register(props) {
           {error ? <Error message={error} /> : null}
         </View>
         <View>
-          <Button title={"Register"} onPress={() => Register()} />
+          <Button title={"Register"} onPress={() => register()} />
         </View>
         <View>
           <Button
