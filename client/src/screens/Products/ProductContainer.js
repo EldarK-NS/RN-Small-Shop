@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   StyleSheet,
   View,
@@ -8,12 +9,12 @@ import {
 } from "react-native";
 import { Container, Header, Icon, Input, Text, Item } from "native-base";
 
-import data from "../../../assets/data/products.json";
-import productCategories from "../../../assets/data/094 categories.json";
 import ProductList from "./ProductList";
 import SearchedProduct from "./SearchedProduct";
 import Banner from "../../Components/Banner";
 import CategoryFilter from "./CategoryFilter";
+import baseURL from "../../../assets/common/baseUrl";
+import axios from "axios";
 
 const { height } = Dimensions.get("window");
 
@@ -26,25 +27,47 @@ export default function ProductContainer(props) {
 
   const [active, setActive] = useState();
   const [initialState, setInitialState] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setProducts(data);
-    setProductsFiltered(data);
-    setFocus(false);
-    setCategories(productCategories);
-    setProductCtg(data);
-    setActive(-1);
-    setInitialState(data);
+  useFocusEffect(
+    useCallback(() => {
+      setFocus(false);
+      setActive(-1);
 
-    return () => {
-      setProducts([]);
-      setProductsFiltered([]);
-      setFocus();
-      setCategories([]);
-      setActive();
-      setInitialState();
-    };
-  }, []);
+      //!Products
+      axios
+        .get(`${baseURL}products`)
+        .then((res) => {
+          setProducts(res.data);
+          setProductsFiltered(res.data);
+          setProductCtg(res.data);
+          setInitialState(res.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log("Api call error", error);
+        });
+
+      //!Categories
+      axios
+        .get(`${baseURL}categories`)
+        .then((res) => {
+          setCategories(res.data);
+        })
+        .catch((error) => {
+          console.log("Api call error", error);
+        });
+
+      return () => {
+        setProducts([]);
+        setProductsFiltered([]);
+        setFocus();
+        setCategories([]);
+        setActive();
+        setInitialState();
+      };
+    }, [])
+  );
 
   const searchProduct = (text) => {
     setProductsFiltered(
@@ -66,77 +89,89 @@ export default function ProductContainer(props) {
         ? [setProductCtg(initialState), setActive(true)]
         : [
             setProductCtg(
-              products.filter((i) => i.category.id === ctg),
+              products.filter((i) => i.category._id === ctg),
               setActive(true)
             ),
           ];
     }
   };
   return (
-    <Container>
-      <Header searchBar rounded>
-        <Item>
-          <Icon name="ios-search" />
-          <Input
-            placeholder="search"
-            variant="rounded"
-            onFocus={openList}
-            onChangeText={(text) => searchProduct(text)}
-          />
-          {focus == true ? <Icon onPress={onBlur} name="ios-close" /> : null}
-        </Item>
-      </Header>
-      {focus == true ? (
-        <SearchedProduct
-          productsFiltered={productsFiltered}
-          navigation={props.navigation}
-        />
-      ) : (
-        <ScrollView>
-          <View>
-            <View>
-              <Banner />
-            </View>
-            <View>
-              <CategoryFilter
-                categories={categories}
-                categoryFilter={changeCtg}
-                productCtg={productCtg}
-                setActive={setActive}
-                active={active}
+    <>
+      {loading == false ? (
+        <Container>
+          <Header searchBar rounded>
+            <Item>
+              <Icon name="ios-search" />
+              <Input
+                placeholder="search"
+                variant="rounded"
+                onFocus={openList}
+                onChangeText={(text) => searchProduct(text)}
               />
-            </View>
-            {productCtg.length > 0 ? (
-              <View style={styles.listContainer}>
-                {productCtg.map((item) => {
-                  return (
-                    <ProductList
-                      key={item._id}
-                      item={item}
-                      navigation={props.navigation}
-                    />
-                  );
-                })}
+              {focus == true ? (
+                <Icon onPress={onBlur} name="ios-close" />
+              ) : null}
+            </Item>
+          </Header>
+          {focus == true ? (
+            <SearchedProduct
+              productsFiltered={productsFiltered}
+              navigation={props.navigation}
+            />
+          ) : (
+            <ScrollView>
+              <View>
+                <View>
+                  <Banner />
+                </View>
+                <View>
+                  <CategoryFilter
+                    categories={categories}
+                    categoryFilter={changeCtg}
+                    productCtg={productCtg}
+                    setActive={setActive}
+                    active={active}
+                  />
+                </View>
+                {productCtg.length > 0 ? (
+                  <View style={styles.listContainer}>
+                    {productCtg.map((item) => {
+                      // console.log(item[0]);
+                      return (
+                        <ProductList
+                          key={item.id}
+                          item={item}
+                          navigation={props.navigation}
+                        />
+                      );
+                    })}
+                  </View>
+                ) : (
+                  <View style={[styles.center, { height: height / 2 }]}>
+                    <Text style={{ color: "black" }}>No products found</Text>
+                  </View>
+                )}
               </View>
-            ) : (
-              <View style={[styles.center, { height: "40%" }]}>
-                <Text style={{ color: "black" }}>No products found</Text>
-              </View>
-            )}
-          </View>
-        </ScrollView>
+            </ScrollView>
+          )}
+        </Container>
+      ) : (
+        <Container
+          style={[
+            styles.center,
+            { backgroundColor: "#f2f2f2", justifyContent: "center" },
+          ]}
+        >
+          <ActivityIndicator size="large" color="tomato" />
+        </Container>
       )}
-    </Container>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  //   container: {
-  //     backgroundColor: "gainsboro",
-  //   },
   listContainer: {
-    height: height,
-    //  width: "100%",
+    width: "100%",
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",

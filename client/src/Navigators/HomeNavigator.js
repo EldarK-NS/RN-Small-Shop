@@ -20,7 +20,7 @@ export default function HomeNavigator() {
         name="Product Detail"
         component={SingleProduct}
         options={{
-          headerShown: false,
+         //  headerShown: false,
         }}
       />
     </Stack.Navigator>

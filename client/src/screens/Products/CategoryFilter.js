@@ -31,9 +31,10 @@ export default function CategoryFilter(props) {
         </TouchableOpacity>
         {categories.map((item) => (
           <TouchableOpacity
-            key={item.id}
+            key={item._id}
             onPress={() => {
-              categoryFilter(item.id), setActive(categories.indexOf(item));
+              categoryFilter(item._id),
+               setActive(categories.indexOf(item));
             }}
           >
             <Badge
