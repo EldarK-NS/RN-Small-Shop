@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
 import { Container } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import EasyButton from "../../Components/StyledComponents/EasyButton";
 
 import axios from "axios";
 import baseURL from "../../../assets/common/baseUrl";
@@ -50,13 +51,16 @@ export default function UserProfile(props) {
           </Text>
         </View>
         <View style={{ marginTop: 80 }}>
-          <Button
-            title={"Sign Out"}
+          <EasyButton
+          large
+          danger
             onPress={() => [
               AsyncStorage.removeItem("jwt"),
               logoutUser(context.dispatch),
             ]}
-          />
+          >
+            <Text style={{ color: "white", fontWeight: "bold" }}>Sign Out</Text>
+          </EasyButton>
         </View>
       </ScrollView>
     </Container>

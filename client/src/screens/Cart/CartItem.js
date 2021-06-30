@@ -3,10 +3,11 @@ import { StyleSheet } from "react-native";
 import { Text, Left, Right, ListItem, Thumbnail, Body } from "native-base";
 
 export default function CartItem(props) {
+
   const data = props.item.item.product;
   const [quantity, setQuantity] = useState(props.item.item.quantity);
   return (
-    <ListItem style={styles.listItem} key={Math.random()} avatar>
+    <ListItem style={styles.listItem} key={data._id} avatar>
       <Left>
         <Thumbnail
           source={{

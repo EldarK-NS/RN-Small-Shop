@@ -11,10 +11,12 @@ import {
 import { connect } from "react-redux";
 import * as actions from "../../../redux/actions/cartActions";
 import Toast from "react-native-toast-message";
+import EasyButton from "../../Components/StyledComponents/EasyButton";
 
 const { width } = Dimensions.get("window");
 
 function ProductCart(props) {
+  
   const { name, price, image, countInStock } = props;
   return (
     <View style={styles.container}>
@@ -33,20 +35,23 @@ function ProductCart(props) {
       </Text>
       <Text style={styles.price}>${price}</Text>
       {countInStock > 0 ? (
-        <Pressable
-          style={styles.buttonContainer}
-          onPress={() => {
-            props.addItemToCart(props),
-              Toast.show({
-                topOffset: 60,
-                type: "success",
-                text1: `${name} added to Cart`,
-                text2: "Go to your cart to complete order",
-              });
-          }}
-        >
-          <Text style={styles.button}>ADD</Text>
-        </Pressable>
+        <View style={{ marginBottom: 60 }}>
+          <EasyButton
+            onPress={() => {
+              props.addItemToCart(props),
+                Toast.show({
+                  topOffset: 60,
+                  type: "success",
+                  text1: `${name} added to Cart`,
+                  text2: "Go to your cart to complete order",
+                });
+            }}
+            primary
+            medium
+          >
+            <Text style={{ color: "white" }}>ADD</Text>
+          </EasyButton>
+        </View>
       ) : (
         <Text style={{ marginTop: 20, color: "red" }}>
           Currently unavalible
@@ -101,17 +106,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
-  buttonContainer: {
-    marginBottom: 60,
-  },
-  button: {
-    padding: 3,
-    width: 60,
-    textAlign: "center",
-    borderRadius: 5,
-    marginTop: 5,
-    backgroundColor: "green",
-    color: "white",
-  },
+  //   button: {
+  //     padding: 3,
+  //     width: 60,
+  //     textAlign: "center",
+  //     borderRadius: 5,
+  //     marginTop: 5,
+  //     backgroundColor: "green",
+  //     color: "white",
+  //   },
 });
 export default connect(null, mapDispatchToProps)(ProductCart);

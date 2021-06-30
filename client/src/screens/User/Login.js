@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import FormContainer from "../../Components/Form/FormContainer";
 import Input from "../../Components/Form/Input";
 import Error from "../../Components/Error";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import EasyButton from "../../Components/StyledComponents/EasyButton";
 
 import AuthGlobal from "../../../context/store/AuthGlobal";
 import { loginUser } from "../../../context/actions/Auth.actions";
@@ -52,14 +53,19 @@ export default function Login(props) {
       />
       <View style={styles.buttonGroup}>
         {error ? <Error message={error} /> : null}
-        <Button title="Login" onPress={handleSubmit} />
+        <EasyButton onPress={() => handleSubmit()} large primary>
+          <Text style={{ color: "white", fontWeight: "bold" }}>Login</Text>
+        </EasyButton>
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
         <Text style={styles.middleText}>Don't have an acccount yet?</Text>
-        <Button
-          title="Register"
+        <EasyButton
           onPress={() => props.navigation.navigate("Register")}
-        />
+          large
+          secondary
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>Register</Text>
+        </EasyButton>
       </View>
     </FormContainer>
   );

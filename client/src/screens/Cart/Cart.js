@@ -21,6 +21,7 @@ import {
 import { SwipeListView } from "react-native-swipe-list-view";
 import CartItem from "./CartItem";
 import Icon from "react-native-vector-icons/FontAwesome";
+import EasyButton from "./../../Components/StyledComponents/EasyButton";
 
 const { height, width } = Dimensions.get("window");
 
@@ -36,7 +37,7 @@ function Cart(props) {
           <H1 style={{ alignSelf: "center" }}>Cart</H1>
           <SwipeListView
             data={props.cartItems}
-            renderItem={(data, idx) => <CartItem item={data} key={idx}/>}
+            renderItem={(data) => <CartItem item={data} />}
             renderHiddenItem={(data) => (
               <View style={styles.hiddenContainer}>
                 <TouchableOpacity
@@ -47,6 +48,7 @@ function Cart(props) {
                 </TouchableOpacity>
               </View>
             )}
+            //!! keyExtractor={item=>item._id}
             disableRightSwipe={true}
             previewOpenDelay={3000}
             friction={1000}
@@ -60,18 +62,28 @@ function Cart(props) {
               <Text style={styles.price}>${total}</Text>
             </Left>
             <Right>
-              <Button
-                title="Clear"
+              <EasyButton
+                danger
+                medium
                 onPress={() => {
                   props.clearCart();
                 }}
-              />
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>
+                  Clear
+                </Text>
+              </EasyButton>
             </Right>
             <Right>
-              <Button
-                title="Checkout"
+              <EasyButton
                 onPress={() => props.navigation.navigate("Checkout")}
-              />
+                primary
+                medium
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>
+                  Checkout
+                </Text>
+              </EasyButton>
             </Right>
           </View>
         </Container>
