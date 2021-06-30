@@ -25,7 +25,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 const { height, width } = Dimensions.get("window");
 
 function Cart(props) {
-  // console.log(props.cartItems)
   let total = 0;
   props.cartItems.forEach((cart) => {
     return (total += cart.product.price);

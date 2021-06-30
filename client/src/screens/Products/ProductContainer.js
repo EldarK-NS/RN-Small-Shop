@@ -136,7 +136,6 @@ export default function ProductContainer(props) {
                 {productCtg.length > 0 ? (
                   <View style={styles.listContainer}>
                     {productCtg.map((item) => {
-                      // console.log(item[0]);
                       return (
                         <ProductList
                           key={item.id}
