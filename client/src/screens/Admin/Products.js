@@ -14,6 +14,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import baseURL from "./../../../assets/common/baseUrl";
 import ListItem from "./ListItem";
+import EasyButton from "../../Components/StyledComponents/EasyButton";
 
 const { height, width } = Dimensions.get("window");
 
@@ -75,8 +76,47 @@ export default function Products(props) {
     );
   };
 
+  const deleteProduct = (id) => {
+    console.log("delete");
+    axios
+      .delete(`${baseURL}products/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        const products = productFilter.filter((item) => item.id !== id);
+        setProductFilter(products);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <View>
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <EasyButton
+          secondary
+          medium
+          onPress={() => props.navigation.navigate("Orders")}
+        >
+          <Icon name="shopping-bag" size={18} color="white" />
+          <Text style={{ fontWeight: "bold", marginLeft: 6 }}>Orders</Text>
+        </EasyButton>
+        <EasyButton
+          secondary
+          medium
+          onPress={() => props.navigation.navigate("ProductForm")}
+        >
+          <Icon name="plus" size={18} color="white" />
+          <Text style={{ fontWeight: "bold", marginLeft: 6 }}>Products</Text>
+        </EasyButton>
+        <EasyButton
+          secondary
+          medium
+          onPress={() => props.navigation.navigate("Categories")}
+        >
+          <Icon name="plus" size={18} color="white" />
+          <Text style={{ fontWeight: "bold", marginLeft: 6 }}>Categories</Text>
+        </EasyButton>
+      </View>
       <View>
         <Header searchBar rounded>
           <Item style={{ padding: 5 }}>
@@ -97,7 +137,12 @@ export default function Products(props) {
           data={productFilter}
           ListHeaderComponent={ListHeader}
           renderItem={({ item, index }) => (
-            <ListItem {...item} navigation={props.navigation} index={index} />
+            <ListItem
+              {...item}
+              navigation={props.navigation}
+              index={index}
+              deleteItem={deleteProduct}
+            />
           )}
           keyExtractor={(item) => item.id}
         />
@@ -120,5 +165,14 @@ const styles = StyleSheet.create({
     height: height / 2,
     alignItems: "center",
     justifyContent: "center",
+  },
+  container: {
+    marginBottom: 140,
+    backgroundColor: "white",
+  },
+  buttonContainer: {
+    margin: 10,
+    alignSelf: "center",
+    flexDirection: "row",
   },
 });

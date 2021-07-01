@@ -43,13 +43,20 @@ export default function ListItem(props) {
               medium
               secondary
               onPress={() => [
-                props.navigation.navigate("ProductForm"),
+                props.navigation.navigate("ProductForm", { item: props }),
                 setModalVisible(false),
               ]}
             >
               <Text style={{ fontWeight: "bold" }}>Edit</Text>
             </EasyButton>
-            <EasyButton medium danger>
+            <EasyButton
+              medium
+              danger
+              onPress={() => [
+                props.deleteItem(props.id),
+                setModalVisible(false),
+              ]}
+            >
               <Text style={styles.textStyle}>Delete</Text>
             </EasyButton>
           </View>

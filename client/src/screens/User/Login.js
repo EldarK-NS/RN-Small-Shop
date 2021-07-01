@@ -12,8 +12,8 @@ import { loginUser } from "../../../context/actions/Auth.actions";
 export default function Login(props) {
   const context = useContext(AuthGlobal);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("nur@nur.ru");
+  const [password, setPassword] = useState("qwerty");
   const [error, setError] = useState("");
 
   useEffect(() => {
